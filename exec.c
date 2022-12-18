@@ -6,12 +6,10 @@
 * @counter: line count
 * @file: pointer to monty file stream
 * @content: line content
-*
 * Return: nothing
 */
 int execute(char *content, stack_t **stack, unsigned int counter, FILE *file)
 {
-
 	instruction_t opst[] = {
 				{"push", f_push}, {"pall", f_pall}, {"pint", f_pint},
 				{"pop", f_pop},
@@ -30,7 +28,6 @@ int execute(char *content, stack_t **stack, unsigned int counter, FILE *file)
 				{"stack", f_stack},
 				{NULL, NULL}
 				};
-
 	unsigned int i = 0;
 	char *op;
 
@@ -46,14 +43,11 @@ int execute(char *content, stack_t **stack, unsigned int counter, FILE *file)
 		}
 		i++;
 	}
-
 	if (op && opst[i].opcode == NULL)
-	{
-		fprintf(stderr, "L%d: unknown instruction %s\n", counter, op);
+		{fprintf(stderr, "L%d: unknown instruction %s\n", counter, op);
 		fclose(file);
 		free(content);
 		free_stack(*stack);
-		exit(EXIT_FAILURE);
-	}
-		return (1);
+		exit(EXIT_FAILURE); }
+	return (1);
 }
